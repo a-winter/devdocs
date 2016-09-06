@@ -85,6 +85,26 @@ class SwagAttribute extends Plugin
 ```
 Updates the existing `my_column` attribute with the new provided data type `text`. In case the attribute doesn't exist, the update function creates the attribute.
 
+
+### Delete an existing attribute
+```
+<?php
+
+namespace SwagAttribute;
+
+use Shopware\Components\Plugin;
+
+class SwagAttribute extends Plugin
+{
+    public function uninstall()
+    {
+        $service = $this->container->get('shopware_attribute.crud_service');
+        $service->delete('s_articles_attributes', 'my_column');
+    }
+}
+```
+Deletes the attribute `my_column` when uninstalling the plugin.
+
 ### Change attribute name
 ```
 <?php
@@ -174,6 +194,17 @@ class SwagAttribute extends Plugin
     }
 }
 ```
+
+### Rebuild attribute models
+
+After updating, deleting or creating attributes you need to rebuild the attribute models.
+
+```
+$metaDataCache = Shopware()->Models()->getConfiguration()->getMetadataCacheImpl();
+$metaDataCache->deleteAll();
+Shopware()->Models()->generateAttributeModels(['s_articles_attributes']);
+```
+
 
 ## ExtJS extensions
 ### Shopware.attribute.Form
