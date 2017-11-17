@@ -567,8 +567,10 @@ Registering the `Shopware\Components\Emotion\EmotionComponentViewSubscriber` as 
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="swag_emotion.emotion_view_subscriber" class="Shopware\Components\Emotion\EmotionComponentViewSubscriber">
-            <argument>%swag_emotion.plugin_dir%</argument>
+        <!-- Change emotion_vimeo in id to your plugin name -->
+        <service id="emotion_vimeo.emotion_view_subscriber" class="Shopware\Components\Emotion\EmotionComponentViewSubscriber">
+            <!-- Change argument emotion_vimeo to your plugin name -->
+            <argument>%emotion_vimeo.plugin_dir%</argument>
             <tag name="shopware.event_subscriber" />
         </service>
     </services>
